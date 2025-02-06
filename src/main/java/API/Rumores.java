@@ -9,5 +9,7 @@ package API;
  * @author berna
  */
 public class Rumores {
+    private static final String API_URL = "https://transfermarket-api.p.rapidapi.com/news";
+    private static final String API_KEY = "51a5628402mshedf0e2040b28bd0p1c7eb4jsnab192d4f4280";
     
 }

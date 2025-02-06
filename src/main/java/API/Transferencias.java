@@ -8,6 +8,8 @@ package API;
  *
  * @author berna
  */
-public class Maiorestransferencias {
+public class Transferencias {
+    private static final String API_URL = "https://transfermarket-api.p.rapidapi.com/transfers";
+    private static final String API_KEY = "51a5628402mshedf0e2040b28bd0p1c7eb4jsnab192d4f4280";
     
 }
