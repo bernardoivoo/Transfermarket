@@ -12,7 +12,7 @@ public class Liga {
     private String nome;
     private String pais;
 
-    public Liga(String nome, String pais, int rankingUEFA) {
+    public Liga(String nome, String pais) {
         this.nome = nome;
         this.pais = pais;
     }
