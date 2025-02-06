@@ -9,6 +9,5 @@ package API;
  * @author berna
  */
 public class Infoclubes {
-    private String teste;
     private String teste2;
 }
