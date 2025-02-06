@@ -6,7 +6,6 @@ package Gerenciador;
 
 
 import Transfermarket.Clube;
-import Transfermarket.FinanceiroClube;
 import Transfermarket.Transferencia;
 import java.util.ArrayList;
 import java.util.List;
