@@ -4,6 +4,8 @@
  */
 package API;
 
+import okhttp3.OkHttpClient;
+
 /**
  *
  * @author berna
