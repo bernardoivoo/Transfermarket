@@ -21,13 +21,14 @@ public class GerenciadorJogadores {
     private final OkHttpClient client = new OkHttpClient();
 
     public String buscarJogadores() {
+        //Criando a requisição http
         Request request = new Request.Builder()
             .url(API_URL)
             .get()
             .addHeader("X-RapidAPI-Key", API_KEY)
             .addHeader("X-RapidAPI-Host", "transfermarket-api.p.rapidapi.com")
             .build();
-
+        //Enviando a requisição
         try (Response response = client.newCall(request).execute()) {
             if (!response.isSuccessful()) {
                 throw new IOException("Erro na requisição: " + response);
