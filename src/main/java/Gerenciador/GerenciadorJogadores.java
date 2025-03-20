@@ -10,11 +10,14 @@ package Gerenciador;
  */
 
 import Transfermarket.Jogador;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GerenciadorJogadores {
     private static final String API_URL = "https://transfermarket-api.p.rapidapi.com/players";
@@ -46,5 +49,17 @@ public class GerenciadorJogadores {
             e.printStackTrace();
             return null;
         }
+    }
+   
+    public List<Jogador> filtrarJogadoresPorClube(String nomeClube) {
+        List<Jogador> jogadores = buscarJogadores();
+        if (jogadores == null) {
+            System.out.println("Erro ao buscar jogadores!");
+            return null;
+        }
+
+        return jogadores.stream()
+                .filter(j -> j.getClubeAtual() != null && j.getClubeAtual().getNome().equalsIgnoreCase(nomeClube))
+                .collect(Collectors.toList());
     }
 }

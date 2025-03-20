@@ -4,22 +4,26 @@
  */
 package Gerenciador;
 
-import Transfermarket.Transferencia;
+/**
+ *
+ * @author berna
+ */
+import Transfermarket.Clube;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
+import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import java.io.IOException;
-import java.util.List;
 
-public class GerenciadorTransferencias {
-    private static final String API_URL = "https://transfermarket-api.p.rapidapi.com/transfers";
+public class GerenciadorClube {
+    private static final String API_URL = "https://transfermarket-api.p.rapidapi.com/clubs";
     private static final String API_KEY = "51a5628402mshedf0e2040b28bd0p1c7eb4jsnab192d4f4280";
 
     private final OkHttpClient client = new OkHttpClient();
 
-    public List<Transferencia> buscarTransferencias() {
+    public List<Clube> buscarClubes() {
         Request request = new Request.Builder()
             .url(API_URL)
             .get()
@@ -32,17 +36,18 @@ public class GerenciadorTransferencias {
                 throw new IOException("Erro na requisição: " + response);
             }
 
-            // Converter JSON para lista de transferências
+            // Converter JSON para lista de clubes
             String json = response.body().string();
             Gson gson = new Gson();
-            List<Transferencia> transferencias = gson.fromJson(json, new TypeToken<List<Transferencia>>() {}.getType());
+            List<Clube> clubes = gson.fromJson(json, new TypeToken<List<Clube>>() {}.getType());
 
-            return transferencias;
+            return clubes;
 
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
+   
 }
 
