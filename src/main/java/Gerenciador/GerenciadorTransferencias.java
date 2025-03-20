@@ -4,10 +4,12 @@
  */
 package Gerenciador;
 
+import Transfermarket.Transferencia;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
+import java.util.List;
 
 public class GerenciadorTransferencias {
     private static final String API_URL = "https://transfermarket-api.p.rapidapi.com/transfers";
@@ -15,8 +17,7 @@ public class GerenciadorTransferencias {
 
     private final OkHttpClient client = new OkHttpClient();
 
-    // Método de requisição que estava em Transferencias.java agora está aqui
-    public String buscarTransferencias() {
+    public List<Transferencia> buscarTransferencias() {
         Request request = new Request.Builder()
             .url(API_URL)
             .get()
@@ -28,7 +29,14 @@ public class GerenciadorTransferencias {
             if (!response.isSuccessful()) {
                 throw new IOException("Erro na requisição: " + response);
             }
-            return response.body().string();
+
+            // Converter JSON para lista de transferências
+            String json = response.body().string();
+            Gson gson = new Gson();
+            List<Transferencia> transferencias = gson.fromJson(json, new TypeToken<List<Transferencia>>() {}.getType());
+
+            return transferencias;
+
         } catch (IOException e) {
             e.printStackTrace();
             return null;
