@@ -1,7 +1,7 @@
 package Transfermarket;
 
 import Gerenciador.GerenciadorClube;
-import Transfermarket.Clube;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -25,10 +25,21 @@ public class Main {
             System.out.print("Digite o nome do clube: ");
             String nomeClube = scanner.nextLine();
             Clube clube = gerenciadorClube.buscarClubePorNome(nomeClube);
+
             if (clube != null) {
                 System.out.println("Informações do clube: " + clube.getNome());
                 System.out.println("Liga: " + clube.getLiga()); // Exibe a liga do clube
-                // Adicione mais informações do clube, se necessário
+
+                // Buscar e exibir o plantel do clube
+                List<String> plantel = gerenciadorClube.buscarPlantelDoClube(clube.getId());
+                if (plantel != null && !plantel.isEmpty()) {
+                    System.out.println("Plantel:");
+                    for (String jogador : plantel) {
+                        System.out.println("- " + jogador);
+                    }
+                } else {
+                    System.out.println("Plantel não disponível.");
+                }
             } else {
                 System.out.println("Clube não encontrado.");
             }

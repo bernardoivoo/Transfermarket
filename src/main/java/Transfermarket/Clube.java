@@ -1,6 +1,7 @@
 package Transfermarket;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class Clube {
     private String id;
@@ -12,6 +13,8 @@ public class Clube {
     private String imagem;
 
     private String liga; // Campo adicionado para armazenar a liga do clube
+
+    private List<String> plantel; // Lista de jogadores
 
     // Getters e Setters
     public String getId() {
@@ -34,13 +37,22 @@ public class Clube {
         this.liga = liga;
     }
 
+    public List<String> getPlantel() {
+        return plantel;
+    }
+
+    public void setPlantel(List<String> plantel) {
+        this.plantel = plantel;
+    }
+
     @Override
     public String toString() {
         return "Clube{" +
                 "id='" + id + '\'' +
                 ", nome='" + nome + '\'' +
                 ", imagem='" + imagem + '\'' +
-                ", liga='" + liga + '\'' + // Exibe a liga na string
+                ", liga='" + liga + '\'' +
+                ", plantel=" + (plantel != null ? plantel : "Não disponível") +
                 '}';
     }
 }

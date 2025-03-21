@@ -1,5 +1,7 @@
 Gerenciador\GerenciadorTransferencias$1.class
+Gerenciador\GerenciadorClube$Jogador.class
 API\Infojogadores.class
+Gerenciador\GerenciadorClube$PlantelResponse.class
 Gerenciador\GerenciadorClube.class
 Gerenciador\GerenciadorJogadores$1.class
 API\Transferencias.class

@@ -2,6 +2,7 @@ package Gerenciador;
 
 import Transfermarket.Clube;
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -71,8 +72,51 @@ public class GerenciadorClube {
             System.out.println("Nenhum clube encontrado na liga.");
         }
     }
+    
+     // Método para buscar o plantel de um clube
+    public List<String> buscarPlantelDoClube(String idClube) {
+        String apiUrl = "https://transfermarket.p.rapidapi.com/clubs/get-squad?id=" + idClube + "&saison_id=2022";
+        Request request = new Request.Builder()
+            .url(apiUrl)
+            .get()
+            .addHeader("x-rapidapi-key", API_KEY)
+            .addHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com")
+            .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (!response.isSuccessful()) {
+                System.out.println("Erro ao buscar plantel: " + response.code() + " - " + response.message());
+                return new ArrayList<>();
+            }
+
+            String json = response.body().string();
+            Gson gson = new Gson();
+            PlantelResponse plantelResponse = gson.fromJson(json, PlantelResponse.class);
+
+            List<String> jogadores = new ArrayList<>();
+            if (plantelResponse != null && plantelResponse.squad != null) {
+                for (Jogador jogador : plantelResponse.squad) {
+                    jogadores.add(jogador.nome);
+                }
+            }
+            return jogadores;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 
     private class ClubesResponse {
         List<Clube> clubs;
+    }
+    
+     private class PlantelResponse {
+        @SerializedName("squad")
+        List<Jogador> squad;
+    }
+
+    private class Jogador {
+        @SerializedName("name")
+        String nome;
     }
 }
