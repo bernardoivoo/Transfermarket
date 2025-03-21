@@ -11,6 +11,9 @@ public class Clube {
     @SerializedName("image")
     private String imagem;
 
+    private String liga; // Campo adicionado para armazenar a liga do clube
+
+    // Getters e Setters
     public String getId() {
         return id;
     }
@@ -23,12 +26,21 @@ public class Clube {
         return imagem;
     }
 
+    public String getLiga() {
+        return liga;
+    }
+
+    public void setLiga(String liga) {
+        this.liga = liga;
+    }
+
     @Override
     public String toString() {
         return "Clube{" +
                 "id='" + id + '\'' +
                 ", nome='" + nome + '\'' +
                 ", imagem='" + imagem + '\'' +
+                ", liga='" + liga + '\'' + // Exibe a liga na string
                 '}';
     }
 }

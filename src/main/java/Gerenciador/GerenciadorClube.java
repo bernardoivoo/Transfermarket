@@ -30,7 +30,7 @@ public class GerenciadorClube {
             }
 
             String json = response.body().string();
-            System.out.println("Resposta JSON: " + json);
+            // Não imprimimos mais o JSON, conforme solicitado
 
             Gson gson = new Gson();
             ClubesResponse clubesResponse = gson.fromJson(json, ClubesResponse.class);
@@ -42,29 +42,33 @@ public class GerenciadorClube {
         }
     }
 
-    // Método para obter clubes das 4 principais ligas
-    public List<Clube> buscarClubesPrincipaisLigas() {
-        // IDs das ligas principais (sem a liga da Alemanha)
+    // Método para buscar um clube pelo nome
+    public Clube buscarClubePorNome(String nomeClube) {
+        // Vamos buscar nas ligas e retornar o primeiro clube que encontrar
         List<String> ligas = List.of("IT1", "GB1", "ES1", "FR1");
-        List<Clube> todosClubes = new ArrayList<>();
 
         for (String liga : ligas) {
-            todosClubes.addAll(buscarClubesPorCompeticao(liga));
+            List<Clube> clubes = buscarClubesPorCompeticao(liga);
+            for (Clube clube : clubes) {
+                if (clube.getNome().equalsIgnoreCase(nomeClube)) {
+                    clube.setLiga(liga); // Atribui a liga ao clube
+                    return clube;
+                }
+            }
         }
-
-        return todosClubes;
+        return null; // Retorna null se o clube não for encontrado
     }
 
-    // Exibir clubes com a identificação da liga
-    public void exibirClubesPorLiga(List<Clube> lista, String liga) {
-        if (lista == null || lista.isEmpty()) {
-            System.out.println("Nenhum clube encontrado na liga " + liga + ".");
-            return;
-        }
-
-        System.out.println("Clubes da liga: " + liga);
-        for (Clube clube : lista) {
-            System.out.println("\uD83C\uDFDF️ Clube: " + clube.getNome());
+    // Método para exibir clubes de uma liga específica
+    public void exibirClubesPorLigaSelecionada(String idLiga) {
+        List<Clube> clubes = buscarClubesPorCompeticao(idLiga);
+        if (clubes != null && !clubes.isEmpty()) {
+            System.out.println("Clubes da liga:");
+            for (Clube clube : clubes) {
+                System.out.println("\uD83C\uDFDF️ Clube: " + clube.getNome());
+            }
+        } else {
+            System.out.println("Nenhum clube encontrado na liga.");
         }
     }
 
