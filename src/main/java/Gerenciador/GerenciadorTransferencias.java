@@ -51,31 +51,5 @@ public class GerenciadorTransferencias {
             .collect(Collectors.toList());
     }
 
-    // Método para listar transferências por liga
-    public List<Transferencia> listarTransferenciasPorLiga(String nomeLiga) {
-        List<Transferencia> transferencias = buscarTransferencias();
-        if (transferencias == null) return null;
 
-       return transferencias.stream()
-    .filter(t -> (t.getClubeOrigem().getLiga().getNome() != null && t.getClubeOrigem().getLiga().getNome().equalsIgnoreCase(nomeLiga)) || 
-                 (t.getClubeDestino().getLiga().getNome() != null && t.getClubeDestino().getLiga().getNome().equalsIgnoreCase(nomeLiga)))
-    .collect(Collectors.toList());
-
-    }
-
-    // Método para exibir transferências formatadas
-    public void exibirTransferencias(List<Transferencia> lista) {
-        if (lista == null || lista.isEmpty()) {
-            System.out.println("Nenhuma transferência encontrada.");
-            return;
-        }
-
-        for (Transferencia t : lista) {
-            System.out.println("🔹 " + t.getJogador().getNome() + " transferido de " +
-                               t.getClubeOrigem().getNome() + " para " +
-                               t.getClubeDestino().getNome() + 
-                               " por €" + t.getValorTransferencia() + " milhões em " +
-                               t.getDataTransferencia());
-        }
-    }
 }

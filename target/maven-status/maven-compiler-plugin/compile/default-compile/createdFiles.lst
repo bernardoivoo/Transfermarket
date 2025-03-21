@@ -1,11 +1,11 @@
 Gerenciador\GerenciadorTransferencias$1.class
 API\Infojogadores.class
 Gerenciador\GerenciadorClube.class
-Gerenciador\GerenciadorClube$1.class
 Gerenciador\GerenciadorJogadores$1.class
 API\Transferencias.class
 Transfermarket\Clube.class
 Gerenciador\FinanceiroClube.class
+Gerenciador\GerenciadorClube$ClubesResponse.class
 Transfermarket\Main.class
 API\Infoclubes.class
 Transfermarket\Jogador.class
